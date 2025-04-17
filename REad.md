@@ -126,7 +126,7 @@ Think of RAM as your study table. The OS decides **what goes where**, **how much
    When a program starts, the OS gives it memory. When the program ends, the memory is freed.  
    Example: Giving someone a room when they check in, and cleaning it after they leave.
 
----
+
 
 ## 🔸 **Paging**
 **Paging** breaks memory into **fixed-size blocks** called **pages**.
@@ -144,7 +144,7 @@ Imagine RAM is a bookshelf with fixed-sized slots (frames).
 You have a book (process) split into chapters (pages).  
 The OS keeps a **table** to remember which chapter is in which slot.
 
----
+
 
 ## 🔸 **Segmentation**
 **Segmentation** divides memory into **logical units** (not fixed-size).  
@@ -161,7 +161,7 @@ Examples: code, data, stack, heap — each gets its own segment.
 - **Drawback:**  
   Can cause **fragmentation**, because segments are of variable sizes.
 
----
+
 
 ### 🧠 Difference between Paging and Segmentation:
 
@@ -172,7 +172,7 @@ Examples: code, data, stack, heap — each gets its own segment.
 | Fragmentation  | Avoids **external**          | Can cause **external**          |
 | Flexibility    | Less (uniform blocks)        | More (logical structure)        |
 
----
+
 
 ## 📍 **Real-Life Example: Opening Browser Tabs**
 
@@ -183,8 +183,6 @@ Let’s say you open multiple tabs in Chrome:
 - It keeps a **page table** to track which tab’s memory is stored where in RAM.
 
 So, if Tab 1 crashes, it doesn’t affect Tab 2 — because each has its own separate memory block.
-
-
 
 
 ---
