@@ -156,6 +156,7 @@ Imagine RAM is a bookshelf with fixed-sized slots (frames).
 You have a book (process) split into chapters (pages).  
 The OS keeps a **table** to remember which chapter is in which slot.
 
+---
 
 ## 🧠 What is Segmentation?
 
