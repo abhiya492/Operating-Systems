@@ -67,14 +67,34 @@ Scheduling determines which process gets the CPU next.
 ### 🔸 FCFS (First Come First Serve):
 - Like a queue at a bank
 - Non-preemptive
+- Once a process starts executing, it runs until it completes, even if another process arrives while it's running
+- one of the easiest CPU scheduling algorithms to understand and implement
 
 ### 🔸 SJF (Shortest Job First):
 - Executes the job with shortest burst time
 - May cause starvation
+- [[Great question! Let's break it down.
+
+> **"May cause starvation"** — in the context of **Shortest Job First (SJF) scheduling**, this means:
+
+#### 🧠 Starvation Explained:
+If **shorter processes keep arriving**, the **longer processes may never get scheduled**, because the scheduler always picks the shortest job.
+
+#### 🔸 Example:
+Let’s say we have one long job `P1` (burst time 20ms), and a bunch of small jobs `P2, P3, P4...` (each 1ms) keep arriving continuously.
+
+- SJF always picks the shortest one first.
+- So `P1` keeps waiting... and waiting...
+- It **starves** — never gets CPU time.
+
+This is called **starvation**, a form of **indefinite blocking**.]]
+
 
 ### 🔸 Round Robin:
 - Each process gets equal time (quantum)
-- Preemptive
+- Preemptive -> scheduler can interrupt a process and switch to another process after the time quantum expires
+- each process receives an equal, fixed amount of time (the "quantum") to execute before being preempted and moved to the back of the ready queue.
+- This ensures fairness and allows all processes to get a chance to run.
 
 ### 🔸 Priority Scheduling:
 - Higher priority runs first
@@ -86,29 +106,86 @@ Imagine 3 tasks arriving:
 P1 (BT=4)   P2 (BT=2)   P3 (BT=1)
 ```
 In FCFS: P1 → P2 → P3
+
 In SJF:  P3 → P2 → P1
 
 ---
 
-## 4️⃣ Memory Management
+## 🧠 **Memory Management in OS**
+Memory management is **how the operating system (OS)** handles and organizes the computer’s memory (RAM).  
+Think of RAM as your study table. The OS decides **what goes where**, **how much space each item gets**, and **cleans up** when it’s not needed anymore.
 
-### 📌 Responsibilities:
-- Keep track of memory usage
-- Allocate/deallocate memory
+---
 
-### 🔸 Paging:
-- Breaks memory into **fixed-size blocks** (pages)
-- Avoids external fragmentation
-- Uses **page table** to map logical → physical addresses
+### 📌 **Main Responsibilities of Memory Management**
+1. **Keep Track of Memory Usage**  
+   The OS needs to know which parts of RAM are being used and which are free.  
+   Example: Like a hotel manager knows which rooms are occupied.
 
-### 🔸 Segmentation:
-- Breaks memory into **logical units** (code, data, stack)
-- More flexible but can cause fragmentation
+2. **Allocate/Deallocate Memory**  
+   When a program starts, the OS gives it memory. When the program ends, the memory is freed.  
+   Example: Giving someone a room when they check in, and cleaning it after they leave.
 
-### 📍 Example:
-You open multiple tabs:
-- Each gets a page in RAM
-- OS maintains a table mapping each tab’s memory
+---
+
+## 🔸 **Paging**
+**Paging** breaks memory into **fixed-size blocks** called **pages**.
+
+- **Why?**  
+  To avoid **external fragmentation** (i.e., small gaps of unusable memory).
+  
+- **How?**  
+  🔹 Memory (RAM) is divided into equal-sized **frames**  
+  🔹 Processes are divided into equal-sized **pages**  
+  🔹 The OS uses a **page table** to map logical addresses (used by the program) to physical addresses (actual location in RAM).
+
+### 🧾 Example:
+Imagine RAM is a bookshelf with fixed-sized slots (frames).  
+You have a book (process) split into chapters (pages).  
+The OS keeps a **table** to remember which chapter is in which slot.
+
+---
+
+## 🔸 **Segmentation**
+**Segmentation** divides memory into **logical units** (not fixed-size).  
+Examples: code, data, stack, heap — each gets its own segment.
+
+- **Why?**  
+  It reflects the way programs are logically structured.  
+  You can have different-sized segments instead of fixed-sized pages.
+
+- **How?**  
+  Each segment has a **base address** (starting point) and a **limit** (size).  
+  The OS maintains a **segment table**.
+
+- **Drawback:**  
+  Can cause **fragmentation**, because segments are of variable sizes.
+
+---
+
+### 🧠 Difference between Paging and Segmentation:
+
+| Feature        | Paging                      | Segmentation                   |
+|----------------|-----------------------------|---------------------------------|
+| Division       | Fixed-size pages             | Variable-size segments          |
+| Mapping        | Page table                   | Segment table                   |
+| Fragmentation  | Avoids **external**          | Can cause **external**          |
+| Flexibility    | Less (uniform blocks)        | More (logical structure)        |
+
+---
+
+## 📍 **Real-Life Example: Opening Browser Tabs**
+
+Let’s say you open multiple tabs in Chrome:
+
+- Each tab is a **process** or a **thread**.
+- OS allocates a **page** for each tab in memory.
+- It keeps a **page table** to track which tab’s memory is stored where in RAM.
+
+So, if Tab 1 crashes, it doesn’t affect Tab 2 — because each has its own separate memory block.
+
+
+
 
 ---
 
