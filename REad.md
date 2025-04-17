@@ -133,6 +133,18 @@ Think of RAM as your study table. The OS decides **what goes where**, **how much
 
 - **Why?**  
   To avoid **external fragmentation** (i.e., small gaps of unusable memory).
+
+  What it is:
+      - External fragmentation occurs when dynamic memory allocation (where memory is allocated and deallocated as needed) leaves small, unusable gaps between allocated blocks. 
+   - Even if the total amount of free memory is larger than the process's required size, these gaps prevent contiguous allocation, making it impossible to load the process. 
+   - This can lead to a situation where a process cannot be loaded into memory even though there's enough total memory space available. 
+
+## Why it happens:
+   - Dynamic memory allocation, where processes are loaded and unloaded as needed, can create these gaps as memory blocks are freed and reallocated.
+   - As processes are removed from memory, the remaining free space is fragmented into smaller blocks. 
+## Impact:
+External fragmentation can significantly reduce the effective memory available, as the scattered free space cannot be used. 
+It can prevent large processes from loading, even if there's enough total free memory
   
 - **How?**  
   🔹 Memory (RAM) is divided into equal-sized **frames**  
